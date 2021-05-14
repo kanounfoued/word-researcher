@@ -1,0 +1,23 @@
+{
+  "name": "word-researcher",
+  "version": "1.0.0",
+  "description": "The package used to find a word inside a text using the KMP (Knuth–Morris–Pratt) algorithm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kanounfoued/word-researcher.git"
+  },
+  "keywords": [],
+  "author": "@kanounfoued",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kanounfoued/word-researcher/issues"
+  },
+  "homepage": "https://github.com/kanounfoued/word-researcher#readme",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
