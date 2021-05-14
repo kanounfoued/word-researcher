@@ -10,6 +10,7 @@ package-lock.json
 # production
 /build
 /dist
+/lib
 
 # misc
 .vscode
