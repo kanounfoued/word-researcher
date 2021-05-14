@@ -40,12 +40,14 @@ module.exports = (_, argv) => {
     },
 
     plugins: [
-      new CopyWebpackPlugin([
-        {
-          from: "./package.json",
-          to: "./dist/package.json",
-        },
-      ]),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: "./package.json",
+            to: "./package.json",
+          },
+        ],
+      }),
     ],
   };
 };
