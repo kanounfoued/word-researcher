@@ -1,18 +1,6 @@
 const path = require("path");
 const TerserJSPlugin = require("terser-webpack-plugin");
-// const ManifestPlugin = require("webpack-manifest-plugin");
-// const getPublicUrlOrPath = require("react-dev-utils/getPublicUrlOrPath");
-// const webpack = require("webpack");
-// const fs = require("fs");
-
-// const appDirectory = fs.realpathSync(process.cwd());
-// const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
-
-// const publicUrlOrPath = getPublicUrlOrPath(
-//   process.env.NODE_ENV === "development",
-//   require(resolveApp("package.json")).homepage,
-//   process.env.PUBLIC_URL
-// );
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = (_, argv) => {
   return {
@@ -51,6 +39,13 @@ module.exports = (_, argv) => {
       ],
     },
 
-    plugins: [],
+    plugins: [
+      new CopyWebpackPlugin([
+        {
+          from: "./package.json",
+          to: "./dist/package.json",
+        },
+      ]),
+    ],
   };
 };
