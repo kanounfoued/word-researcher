@@ -25,8 +25,34 @@ const eval_KMP_prefix = (word: string): number[] => {
   return result;
 };
 
-const findOne = (text: string, word: string): number => {
-  return -1;
+const findOne = (text: string, word: string): number | String | null => {
+  if (!text) {
+    return null;
+  }
+
+  if (!word) {
+    return '0 Match';
+  }
+
+  const result: number[] = eval_KMP_prefix(word);
+
+  let maxLength: number = 0;
+
+  for (let i = 0; i < text.length; i++) {
+    while (maxLength > 0 && text[i] !== word[maxLength]) {
+      maxLength = result[maxLength - 1];
+    }
+
+    if (text[i] === word[maxLength]) {
+      maxLength++;
+    }
+
+    if (maxLength === word.length) {
+      return i + 1 - word.length;
+    }
+  }
+
+  return '0 Match';
 };
 
 const findAll = (text: string, word: string): number[] => {
