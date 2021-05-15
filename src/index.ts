@@ -1,7 +1,5 @@
-const second = 2;
-
-export const returnNumber = (): number => {
-  return 4;
+import { findAll, findOne } from './KMP';
+export default {
+  findAll,
+  findOne,
 };
-
-returnNumber();
