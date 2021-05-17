@@ -55,8 +55,38 @@ const findOne = (text: string, word: string): number | String | null => {
   return '0 Match';
 };
 
-const findAll = (text: string, word: string): number[] => {
-  return [];
+const findAll = (text: string, word: string): number[] | String | null => {
+  if (!text) {
+    return null;
+  }
+
+  if (!word) {
+    return '0 Match';
+  }
+
+  const result: number[] = eval_KMP_prefix(word);
+
+  let maxLength: number = 0;
+
+  for (let i = 0; i < text.length; i++) {
+    while (maxLength > 0 && text[i] !== word[maxLength]) {
+      maxLength = result[maxLength - 1];
+    }
+
+    if (text[i] === word[maxLength]) {
+      maxLength++;
+    }
+
+    if (maxLength === word.length) {
+      result.push(i + 1 - word.length);
+    }
+  }
+
+  if (result.length) {
+    return result;
+  }
+
+  return '0 Match';
 };
 
 export { findOne, findAll };
