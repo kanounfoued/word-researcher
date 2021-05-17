@@ -1,10 +1,6 @@
-const eval_KMP_prefix = (word: string): number[] => {
+export const eval_KMP_prefix = (word: string): number[] => {
   if (!word) {
     return [];
-  }
-
-  if (typeof word !== 'string') {
-    word = word + '';
   }
 
   word = word.toLowerCase();
