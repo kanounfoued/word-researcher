@@ -25,13 +25,9 @@ const eval_KMP_prefix = (word: string): number[] => {
   return result;
 };
 
-const findOne = (text: string, word: string): number | String | null => {
-  if (!text) {
+const findOne = (text: string, word: string): number | null => {
+  if (!text || !word) {
     return null;
-  }
-
-  if (!word) {
-    return '0 Match';
   }
 
   const result: number[] = eval_KMP_prefix(word);
@@ -52,7 +48,7 @@ const findOne = (text: string, word: string): number | String | null => {
     }
   }
 
-  return '0 Match';
+  return null;
 };
 
 const findAll = (text: string, word: string): number[] | String | null => {
