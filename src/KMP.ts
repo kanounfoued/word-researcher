@@ -21,6 +21,7 @@ export const eval_KMP_prefix = (word: string): number[] => {
   return result;
 };
 
+// treat the case of case sensative
 const findOne = (text: string, word: string): number | null => {
   if (!text || !word) {
     return null;
@@ -57,6 +58,7 @@ const findAll = (text: string, word: string): number[] | String | null => {
   }
 
   const result: number[] = eval_KMP_prefix(word);
+  const allPositions: number[] = [];
 
   let maxLength: number = 0;
 
@@ -70,12 +72,12 @@ const findAll = (text: string, word: string): number[] | String | null => {
     }
 
     if (maxLength === word.length) {
-      result.push(i + 1 - word.length);
+      allPositions.push(i + 1 - word.length);
     }
   }
 
-  if (result.length) {
-    return result;
+  if (allPositions.length) {
+    return allPositions;
   }
 
   return '0 Match';
