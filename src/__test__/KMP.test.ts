@@ -1,11 +1,11 @@
 import { findOne, eval_KMP_prefix } from '../KMP';
 
 test('testing findOne functionality with empty params', () => {
-  expect(findOne('', '')).toBe(null);
+  expect(findOne('', '')).toBe(-1);
 });
 
 test('testing findOne functionality with empty word', () => {
-  expect(findOne('this is a nice text for search', '')).toBe(null);
+  expect(findOne('this is a nice text for search', '')).toBe(-1);
 });
 
 test('testing findOne functionality with empty the word text', () => {
