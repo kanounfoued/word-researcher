@@ -1,3 +1,9 @@
+/**
+ * @param word @String
+ * @returns [] @if the word is empty
+ * @else list of the score.
+ */
+
 export const eval_KMP_prefix = (word: string): number[] => {
   if (!word) {
     return [];
@@ -21,10 +27,17 @@ export const eval_KMP_prefix = (word: string): number[] => {
   return result;
 };
 
+/**
+ * @param text @String text to search in.
+ * @param word @String the word to look for its occurence.
+ * @returns -1 if no occurence
+ * @else the first encountered poistion.
+ */
+
 // treat the case of case sensative
-const findOne = (text: string, word: string): number | null => {
+const findOne = (text: string, word: string): number => {
   if (!text || !word) {
-    return null;
+    return -1;
   }
 
   const result: number[] = eval_KMP_prefix(word);
@@ -45,16 +58,23 @@ const findOne = (text: string, word: string): number | null => {
     }
   }
 
-  return null;
+  return -1;
 };
 
-const findAll = (text: string, word: string): number[] | String | null => {
+/**
+ * @param text @String text to search in.
+ * @param word @String the word to look for its occurence.
+ * @returns [] @if no occurence
+ * @else all occurences found in the text.
+ */
+
+const findAll = (text: string, word: string): number[] => {
   if (!text) {
-    return null;
+    return [];
   }
 
   if (!word) {
-    return '0 Match';
+    return [];
   }
 
   const result: number[] = eval_KMP_prefix(word);
@@ -80,7 +100,7 @@ const findAll = (text: string, word: string): number[] | String | null => {
     return allPositions;
   }
 
-  return '0 Match';
+  return [];
 };
 
 export { findOne, findAll };
