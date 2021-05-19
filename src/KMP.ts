@@ -1,3 +1,5 @@
+import Options from './types/Options';
+
 /**
  * @param word @String
  * @returns [] @if the word is empty
@@ -9,7 +11,8 @@ export const eval_KMP_prefix = (word: string): number[] => {
     return [];
   }
 
-  word = word.toLowerCase();
+  // TREATE CASE SENSATIVE OUTSIDE THIS FUNCTION.
+  //word = word.toLowerCase();
 
   const result: number[] = [];
   result[0] = 0;
@@ -35,9 +38,14 @@ export const eval_KMP_prefix = (word: string): number[] => {
  */
 
 // treat the case of case sensative
-const findOne = (text: string, word: string): number => {
+const findOne = (text: string, word: string, options: Options = {}): number => {
   if (!text || !word) {
     return -1;
+  }
+
+  if (!options.caseSensative) {
+    text = text.toLowerCase();
+    word = word.toLowerCase();
   }
 
   const result: number[] = eval_KMP_prefix(word);
@@ -68,13 +76,18 @@ const findOne = (text: string, word: string): number => {
  * @else all occurences found in the text.
  */
 
-const findAll = (text: string, word: string): number[] => {
+const findAll = (text: string, word: string, options: Options = {}): number[] => {
   if (!text) {
     return [];
   }
 
   if (!word) {
     return [];
+  }
+
+  if (!options.caseSensative) {
+    text = text.toLowerCase();
+    word = word.toLowerCase();
   }
 
   const result: number[] = eval_KMP_prefix(word);
