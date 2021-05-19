@@ -1,6 +1,6 @@
 {
   "name": "word-researcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The package used to find a word inside a text using the KMP (Knuth–Morris–Pratt) algorithm",
   "main": "./dist/index.js",
   "types": "lib/index.d.ts",
