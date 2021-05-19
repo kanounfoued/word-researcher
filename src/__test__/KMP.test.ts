@@ -1,4 +1,4 @@
-import { findOne, eval_KMP_prefix } from '../KMP';
+import { findOne, evalKMPPrefix } from '../KMP';
 
 const text = `The phrase hangs like a banner above the ruptures of 2020—a year that began three months into a civil rebellion in Iraq, which, like its Western torturer, saw the largest uprising in national history. Last spring I Was reminded of the demonstration where I first saw windows smashed: I was 20, at the 2012 march against NATO in Chicago, just after the “end” of the Second Gulf War.`;
 
@@ -39,25 +39,25 @@ test('testing findOne functionality with the word was and case-sensative', () =>
 // ************************************************************
 
 // ************************************************************
-// ****************** teval_KMP_prefix tests ******************
+// ****************** evalKMPPrefix tests ******************
 // ************************************************************
 
-test('testing eval_KMP_prefix functionality for an empty string', () => {
-  expect(eval_KMP_prefix('')).toEqual([]);
+test('testing evalKMPPrefix functionality for an empty string', () => {
+  expect(evalKMPPrefix('')).toEqual([]);
 });
 
-test('testing eval_KMP_prefix functionality for a sequence of numbers', () => {
-  expect(eval_KMP_prefix('23452346')).toEqual([0, 0, 0, 0, 1, 2, 3, 0]);
+test('testing evalKMPPrefix functionality for a sequence of numbers', () => {
+  expect(evalKMPPrefix('23452346')).toEqual([0, 0, 0, 0, 1, 2, 3, 0]);
 });
 
-test('testing eval_KMP_prefix functionality for a sequence of string', () => {
-  expect(eval_KMP_prefix('abfdchjhabuiokabf')).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 1, 2, 3]);
+test('testing evalKMPPrefix functionality for a sequence of string', () => {
+  expect(evalKMPPrefix('abfdchjhabuiokabf')).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 1, 2, 3]);
 });
 
-test('testing eval_KMP_prefix functionality for a sequence of string case-sensative', () => {
-  expect(eval_KMP_prefix('abfDchJhab')).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 1, 2]);
+test('testing evalKMPPrefix functionality for a sequence of string case-sensative', () => {
+  expect(evalKMPPrefix('abfDchJhab')).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 1, 2]);
 });
 
 // ************************************************************
-// ****************** teval_KMP_prefix tests ******************
+// ****************** evalKMPPrefix tests ******************
 // ************************************************************
