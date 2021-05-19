@@ -6,13 +6,13 @@ import Options from './types/Options';
  * @else list of the score.
  */
 
-export const eval_KMP_prefix = (word: string): number[] => {
+export const evalKMPPrefix = (word: string): number[] => {
   if (!word) {
     return [];
   }
 
   // TREATE CASE SENSATIVE OUTSIDE THIS FUNCTION.
-  //word = word.toLowerCase();
+  // word = word.toLowerCase();
 
   const result: number[] = [];
   result[0] = 0;
@@ -48,7 +48,7 @@ const findOne = (text: string, word: string, options: Options = {}): number => {
     word = word.toLowerCase();
   }
 
-  const result: number[] = eval_KMP_prefix(word);
+  const result: number[] = evalKMPPrefix(word);
 
   let maxLength: number = 0;
 
@@ -90,7 +90,7 @@ const findAll = (text: string, word: string, options: Options = {}): number[] =>
     word = word.toLowerCase();
   }
 
-  const result: number[] = eval_KMP_prefix(word);
+  const result: number[] = evalKMPPrefix(word);
   const allPositions: number[] = [];
 
   let maxLength: number = 0;
