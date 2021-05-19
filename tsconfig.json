@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
+    "moduleResolution": "node",
     "target": "es5",
     "module": "commonjs",
     "declaration": true,
-    "outDir": "./lib",
+    "lib": ["es2015", "dom"],
+    "outDir": "lib",
+    "sourceMap": true,
     "strict": true,
     "removeComments": true,
     "preserveConstEnums": true

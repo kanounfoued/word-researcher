@@ -2,11 +2,11 @@
   "name": "word-researcher",
   "version": "1.0.1",
   "description": "The package used to find a word inside a text using the KMP (Knuth–Morris–Pratt) algorithm",
-  "main": "./dist/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib",
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "webpack --mode production",
+    "build": "tsc && tsc -p . && webpack --mode production",
     "format": "prettier --write \"src/**/*.ts\" || \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
@@ -26,13 +26,14 @@
     "word finder"
   ],
   "author": "@kanounfoued",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/kanounfoued/word-researcher/issues"
   },
   "homepage": "https://github.com/kanounfoued/word-researcher#readme",
   "devDependencies": {
     "@types/jest": "^26.0.23",
+    "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^8.1.1",
     "jest": "^26.6.3",
     "prettier": "^2.3.0",

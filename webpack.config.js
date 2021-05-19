@@ -1,40 +1,40 @@
-const path = require("path");
-const TerserJSPlugin = require("terser-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const path = require('path');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = (_, argv) => {
+module.exports = (_) => {
   return {
-    mode: argv.mode,
-    devtool: "source-map",
-    entry: "./src/index.ts",
+    entry: './lib/index.js',
 
     output: {
-      path: path.resolve(__dirname + "/dist"),
-      publicPath: "/",
-      filename:
-        argv.mode === "production" ? "[name].[contenthash:8].js" : "bundle.js",
-      chunkFilename:
-        argv.mode === "production"
-          ? "[name].[contenthash:8].chunk.js"
-          : "[name].chunk.js",
+      path: path.resolve(__dirname + '/dist'),
+      filename: '[name].js',
+      library: 'WordResearcher',
+      libraryTarget: 'umd',
+      umdNamedDefine: true,
     },
 
     // I used this config in the last project with the company I worked on. feel free to use it or just put your own. it has an uncredible effect on the performance on that project.
     optimization: {
-      minimize: argv.mode === "production",
+      minimize: true,
       minimizer: [new TerserJSPlugin()],
     },
 
     resolve: {
-      extensions: [".ts", ".js"],
+      extensions: ['.ts', '.tsx', '.js'],
     },
 
     module: {
       rules: [
         {
-          test: /\.ts$/,
+          test: /\.js$/,
           exclude: [/node_modules/],
-          loader: "ts-loader",
+          loader: 'babel-loader',
+        },
+        {
+          test: /\.tsx?$/,
+          exclude: [/node_modules/],
+          loader: 'ts-loader',
         },
       ],
     },
@@ -43,8 +43,8 @@ module.exports = (_, argv) => {
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: "./package.json",
-            to: "./package.json",
+            from: './package.json',
+            to: './package.json',
           },
         ],
       }),
