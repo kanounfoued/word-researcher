@@ -1,5 +1,5 @@
 export default interface Options {
   caseSensative?: boolean;
-  skipXFirstResults?: number;
-  skipXLastResults?: number;
+  skipXFirstResults?: number; // should be >= 1
+  skipXLastResults?: number; // should be >= 1
 }
