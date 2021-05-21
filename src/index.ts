@@ -97,12 +97,14 @@ export const findAll = (text: string, word: string, options: Options = {}): numb
 export const findAllWithSkip = (text: string, word: string, options: Options = {}): number[] => {
   const results = findAll(text, word, options);
 
-  if (options.skipXFirstResults) {
-    return results.slice(options.skipXFirstResults);
+  const { skipXFirstResults, skipXLastResults } = options;
+
+  if (skipXFirstResults && skipXFirstResults > 0) {
+    return results.slice(skipXFirstResults);
   }
 
-  if (options.skipXLastResults) {
-    return results.slice(0, options.skipXLastResults);
+  if (skipXLastResults && skipXLastResults > 0) {
+    return results.slice(0, skipXLastResults);
   }
 
   return results;
