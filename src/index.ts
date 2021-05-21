@@ -86,3 +86,24 @@ export const findAll = (text: string, word: string, options: Options = {}): numb
 
   return [];
 };
+
+/**
+ * @param text @String text to search in.
+ * @param word @String the word to look for its occurence.
+ * @returns skip the first occurences @if @var skipXFirstResults has been provided.
+ * @returns skip the last occurences @if @var skipXLastResults has been provided.
+ * @returns all occurences @if no of the above options has been provided.
+ */
+export const findAllWithSkip = (text: string, word: string, options: Options = {}): number[] => {
+  const results = findAll(text, word, options);
+
+  if (options.skipXFirstResults) {
+    return results.slice(options.skipXFirstResults);
+  }
+
+  if (options.skipXLastResults) {
+    return results.slice(0, options.skipXLastResults);
+  }
+
+  return results;
+};
