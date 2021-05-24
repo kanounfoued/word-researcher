@@ -1,22 +1,35 @@
 const historyStack: string[] = [];
-const historyQueue: string[] = [];
+let currentPosition = historyStack.length - 1;
 
-export const push_word = (word: string) => {
+export const pushWord = (word: string): string | null => {
+  if (!word) {
+    return null;
+  }
+
   historyStack.push(word);
+  currentPosition = historyStack.length - 1;
+
+  return word;
 };
 
-export const popWord = () => {
-  const word: string | null = historyStack.pop() || null;
-
-  if (word) {
-    historyQueue.push(word);
+export const getPreviousWord = (): string | null => {
+  if (currentPosition === 0) {
+    return null;
   }
+
+  currentPosition -= 1;
+  return historyStack[currentPosition];
 };
 
-export const getPrevious = () => {
-  const word: string | null = historyQueue.pop() || null;
-
-  if (word) {
-    historyStack.push(word);
+export const getNextWord = (): string | null => {
+  if (currentPosition >= historyStack.length - 1) {
+    return null;
   }
+
+  currentPosition += 1;
+  return historyStack[currentPosition];
+};
+
+export const clearHistory = () => {
+  historyStack.length = 0;
 };
