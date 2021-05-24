@@ -1,5 +1,5 @@
 const historyStack: string[] = [];
-let currentPosition = historyStack.length - 1;
+let currentPosition = 0;
 
 /**
  * @param word the word tend to be searched.
@@ -8,6 +8,12 @@ let currentPosition = historyStack.length - 1;
 export const pushWord = (word: string): string | null => {
   if (!word) {
     return null;
+  }
+
+  const index = historyStack.findIndex((item) => item === word);
+
+  if (index >= 0) {
+    historyStack.splice(index, 1);
   }
 
   historyStack.push(word);
