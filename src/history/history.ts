@@ -33,3 +33,11 @@ export const getNextWord = (): string | null => {
 export const clearHistory = () => {
   historyStack.length = 0;
 };
+
+export const jumpToIndex = (index: number): string | null => {
+  if (index < 0 || index > historyStack.length - 1) {
+    return null;
+  }
+
+  return historyStack[index];
+};
