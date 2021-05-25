@@ -1,4 +1,4 @@
-const historyStack: string[] = [];
+let historyStack: string[] = [];
 let currentPosition = 0;
 
 /**
@@ -53,6 +53,7 @@ export const getNextWord = (): string | null => {
  */
 export const clearHistory = () => {
   historyStack.length = 0;
+  currentPosition = 0;
 };
 
 /**
