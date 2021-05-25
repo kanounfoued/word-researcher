@@ -67,3 +67,8 @@ export const jumpToIndex = (index: number): string | null => {
 
   return historyStack[index];
 };
+
+/**
+ * @returns The length of the historyStack.
+ */
+export const historyLength = (): number => historyStack.length;
