@@ -61,6 +61,8 @@ export const clearHistory = () => {
  * @returns the word at the position @param index.
  */
 export const jumpToIndex = (index: number): string | null => {
+  index = +index.toFixed(0);
+
   if (index < 0 || index > historyStack.length - 1) {
     return null;
   }
