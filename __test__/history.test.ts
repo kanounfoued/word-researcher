@@ -1,28 +1,47 @@
-import { pushWord, clearHistory, jumpToIndex } from '../src/history/history';
+import {
+  pushWord,
+  clearHistory,
+  jumpToIndex,
+  getPreviousWord,
+  getNextWord,
+  historyLength,
+} from '../src/history/history';
 
 describe('testing the historyStack starting with empty array []', () => {
+  beforeEach(() => clearHistory());
+
   // ************************************************************
   // ********************* pushWord Function ********************
   // ************************************************************
 
   test('test pushWord with empty string word', () => {
     expect(pushWord('')).toBe(null);
+    expect(historyLength()).toBe(0);
   });
 
   test('test pushWord with value (bill)', () => {
     expect(pushWord('bill')).toBe('bill');
-  });
-
-  test('test pushWord with value (eat)', () => {
-    expect(pushWord('eat')).toBe('eat');
+    expect(historyLength()).toBe(1);
   });
 
   // ************************************************************
-  // ********************* pushWord Function ********************
+  // ********************* getPreviousWord Function *************
   // ************************************************************
 
+  test('test getPreviousWord with after clearing the history', () => {
+    expect(getPreviousWord()).toBe(null);
+  });
+
   // ************************************************************
-  // ********************* jumpToIndex Function ********************
+  // ********************* getNextWord Function *****************
+  // ************************************************************
+
+  test('test getNextWord with after clearing the history', () => {
+    expect(getNextWord()).toBe(null);
+  });
+
+  // ************************************************************
+  // ********************* jumpToIndex Function *****************
   // ************************************************************
 
   test('test jumpToIndex with value (-1)', () => {
@@ -30,25 +49,12 @@ describe('testing the historyStack starting with empty array []', () => {
   });
 
   test('test jumpToIndex with value (0)', () => {
-    expect(jumpToIndex(0)).toBe('bill');
-  });
-
-  test('test jumpToIndex with value (1)', () => {
-    expect(jumpToIndex(1)).toBe('eat');
-  });
-
-  test('test jumpToIndex with value greater than the length of the history', () => {
-    expect(jumpToIndex(2)).toBe(null);
-  });
-
-  test('test jumpToIndex after clearing the history', () => {
-    clearHistory();
     expect(jumpToIndex(0)).toBe(null);
   });
 
-  // ************************************************************
-  // ********************* jumpToIndex Function ********************
-  // ************************************************************
+  test('test jumpToIndex with value (1)', () => {
+    expect(jumpToIndex(1)).toBe(null);
+  });
 
   // ************************************************************
   // ********************* clearHistory Function ****************
@@ -56,9 +62,6 @@ describe('testing the historyStack starting with empty array []', () => {
 
   test('test clearHistory functionality', () => {
     expect(clearHistory()).toBe(undefined);
+    expect(historyLength()).toBe(0);
   });
-
-  // ************************************************************
-  // ********************* clearHistory Function ****************
-  // ************************************************************
 });
