@@ -1,4 +1,5 @@
 import { evalKMPPrefix } from './KMP-utils/KMP';
+import * as history from './history/history';
 import Options from './types/Options';
 
 /**
@@ -22,6 +23,8 @@ export const findOne = (text: string, word: string, options: Options = {}): numb
   const result: number[] = evalKMPPrefix(word);
 
   let maxLength: number = 0;
+
+  history.pushWord(word);
 
   for (let i = 0; i < text.length; i++) {
     while (maxLength > 0 && text[i] !== word[maxLength]) {
@@ -66,6 +69,8 @@ export const findAll = (text: string, word: string, options: Options = {}): numb
 
   let maxLength: number = 0;
 
+  history.pushWord(word);
+
   for (let i = 0; i < text.length; i++) {
     while (maxLength > 0 && text[i] !== word[maxLength]) {
       maxLength = result[maxLength - 1];
@@ -109,3 +114,5 @@ export const findAllWithSkip = (text: string, word: string, options: Options = {
 
   return results;
 };
+
+export { history };
