@@ -69,6 +69,8 @@ export const findAll = (text: string, word: string, options: Options = {}): numb
 
   let maxLength: number = 0;
 
+  history.pushWord(word);
+
   for (let i = 0; i < text.length; i++) {
     while (maxLength > 0 && text[i] !== word[maxLength]) {
       maxLength = result[maxLength - 1];
