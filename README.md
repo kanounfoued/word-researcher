@@ -31,8 +31,6 @@ For now, I've just created the find method, and the history of search. I am aimi
 
 here some examples about the tools provided by the package, I am going to listed them first with a simple description about what it is aiming to do, and then I will provide some examples clearifying their use, and how to combine them if it is possible.
 
-<!-- Examples -->
-
 This is the way how to import any tool :
 
 ```bash
@@ -56,21 +54,62 @@ This is the way how to import any tool :
 @param text => string
 @param word => string
 @param options => Object
-@returns position => number
+@returns position => number[]
 ```
 
-The previous functionality may take options as an Object {}.
+The previous functionality may take options as an Object {}. The available options are described in the next section down below :
 
 ```bash
  options = {
-    caseSensative: boolean, default => false
-    skipXFirstResults: number, default => 0
-    skipXLastResults: number, default => 0
+    caseSensative: boolean,     # default => false
+    skipXFirstResults: number,  # default => 0
+    skipXLastResults: number,   # default => 0
  }
-
 ```
 
-<!-- Examples -->
+skipXFirstResults and skipXLastResults are only valid for <label style='color: dodgerblue'>findAllWithSkip</label> method.
+
+<h4 style="color: dodgerblue; display: inline;">findAllWithSkip( text, word, options ) : </h4> the main idea behind, is to offer the possibility to skip some results at the beginning or at the end of the text. Examples will be presented down below.
+
+```bash
+@param text => string
+@param word => string
+@param options => Object
+@returns position => number[]
+```
+
+<h4 style="color: dodgerblue; display: inline;">history.pushWord( word ) : </h4> this function save the word in the history stack.
+
+```bash
+@param word => string
+```
+
+<h4 style="color: dodgerblue; display: inline;">history.getPreviousWord() : </h4> the function returns the (i-1) word's postion in the history.
+
+<p></p>
+
+<h4 style="color: dodgerblue; display: inline;">history.getNextWord() : </h4> the function may be called after using the getPreviousWord function, so it returns the word at position (i+1), until it reaches the last searched word in the history.
+
+<p></p>
+
+<h4 style="color: dodgerblue; display: inline;">history.clearHistory() : </h4> empty the history.
+
+<p></p>
+
+<h4 style="color: dodgerblue; display: inline;">history.jumpToIndex( index ) : </h4> the function returns the searched word at a certain position passed within parameter.
+
+```bash
+@param index => number
+@returns => string
+```
+
+<p></p>
+
+<h4 style="color: dodgerblue; display: inline;">history.historyLength() : </h4> the function returns the length of the history stack.
+
+```bash
+@returns => number
+```
 
 ## Note
 
