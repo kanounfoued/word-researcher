@@ -2,6 +2,15 @@ let historyStack: string[] = [];
 let currentPosition: number = 0;
 
 /**
+ * @param history passed an old history to initialize the historyStack.
+ * The function is used for the sake of test.
+ */
+export const initHistory = (history: string[]) => {
+  historyStack = [...history];
+  currentPosition = history.length > 0 ? history.length - 1 : 0;
+};
+
+/**
  * @param word the word tend to be searched.
  * @returns the searched word @if the word has a truthy value.
  */
@@ -74,3 +83,8 @@ export const jumpToIndex = (index: number): string | null => {
  * @returns The length of the historyStack.
  */
 export const historyLength = (): number => historyStack.length;
+
+/**
+ * @returns The currentPosition variable.
+ */
+export const getCurrentPosition = (): number => currentPosition;
