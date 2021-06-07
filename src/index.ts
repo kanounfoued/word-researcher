@@ -104,7 +104,7 @@ export const findAllWithSkip = (text: string, word: string, options: Options = {
     return results.slice(skipXFirstResults);
   }
 
-  if (skipXLastResults && skipXLastResults > 0) {
+  if (skipXLastResults && skipXLastResults < 0) {
     return results.slice(0, skipXLastResults);
   }
 
