@@ -1,6 +1,8 @@
 import { evalKMPPrefix } from './KMP-utils/KMP';
-import * as history from './history/history';
+// import * as history from './history/history';
 import Options from './types/Options';
+
+export { default as History } from './history/history';
 
 /**
  * @param text @String text to search in.
@@ -111,4 +113,4 @@ export const findAllWithSkip = (text: string, word: string, options: Options = {
   return results;
 };
 
-export { history };
+// export { history };

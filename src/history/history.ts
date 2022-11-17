@@ -1,90 +1,70 @@
-let historyStack: string[] = [];
-let currentPosition: number = 0;
+export default class WordHistory<T> {
+  private history: T[];
+  private currentIndex: number;
 
-/**
- * @param history passed an old history to initialize the historyStack.
- * The function is used for the sake of test.
- */
-export const initHistory = (history: string[]) => {
-  historyStack = [...history];
-  currentPosition = history.length > 0 ? history.length - 1 : 0;
-};
-
-/**
- * @param word the word tend to be searched.
- * @returns the searched word @if the word has a truthy value.
- */
-export const pushWord = (word: string): string | null => {
-  if (!word) {
-    return null;
+  constructor(history: T[] = []) {
+    this.history = [...history];
+    this.currentIndex = history.length > 0 ? history.length - 1 : 0;
   }
 
-  const index: number = historyStack.findIndex((item) => item === word);
+  add<K extends keyof T>(word: T, property?: K): T | null {
+    if (!word) return null;
+    let index = -1;
 
-  if (index >= 0) {
-    historyStack.splice(index, 1);
+    if (typeof word === 'string') {
+      index = this.history.findIndex((item) => item === word);
+    } else {
+      if (!property) return null;
+
+      index = this.history.findIndex((item) => item[property] === word[property]);
+    }
+
+    if (index >= 0) this.history.splice(index, 1);
+
+    this.history.push(word);
+    this.currentIndex = this.history.length - 1;
+
+    return word;
   }
 
-  historyStack.push(word);
-  currentPosition = historyStack.length - 1;
+  getNext(): T | null {
+    if (this.currentIndex >= this.history.length - 1) {
+      return null;
+    }
 
-  return word;
-};
-
-/**
- * @returns the previous searched word in the history.
- * until it reaches the index 0
- */
-export const getPreviousWord = (): string | null => {
-  if (currentPosition === 0) {
-    return null;
+    this.currentIndex += 1;
+    return this.history[this.currentIndex];
   }
 
-  currentPosition -= 1;
-  return historyStack[currentPosition];
-};
+  getPrevious(): T | null {
+    if (this.currentIndex === 0) {
+      return null;
+    }
 
-/**
- * @returns the next searched word in the historyStack.
- * @if the index is in between 0 and historyStack length.
- */
-export const getNextWord = (): string | null => {
-  if (currentPosition >= historyStack.length - 1) {
-    return null;
+    this.currentIndex -= 1;
+    return this.history[this.currentIndex];
   }
 
-  currentPosition += 1;
-  return historyStack[currentPosition];
-};
+  goToIndex(index: number): T | null {
+    index = +index.toFixed(0);
 
-/**
- * empty the history.
- */
-export const clearHistory = () => {
-  historyStack.length = 0;
-  currentPosition = 0;
-};
+    if (index < 0 || index > this.history.length - 1) {
+      return null;
+    }
 
-/**
- * @param index is the position of the word will be returned.
- * @returns the word at the position @param index.
- */
-export const jumpToIndex = (index: number): string | null => {
-  index = +index.toFixed(0);
-
-  if (index < 0 || index > historyStack.length - 1) {
-    return null;
+    return this.history[index];
   }
 
-  return historyStack[index];
-};
+  clear(): void {
+    this.history.length = 0;
+    this.currentIndex = 0;
+  }
 
-/**
- * @returns The length of the historyStack.
- */
-export const historyLength = (): number => historyStack.length;
+  size(): number {
+    return this.history.length;
+  }
 
-/**
- * @returns The currentPosition variable.
- */
-export const getCurrentPosition = (): number => currentPosition;
+  get getCurrentIndex(): number {
+    return this.currentIndex;
+  }
+}
