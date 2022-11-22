@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "types": "lib",
   "scripts": {
+    "start": "tsc && tsc -p .",
     "test": "jest --config jestconfig.json",
     "build": "tsc && tsc -p . && webpack --mode production",
     "format": "prettier --write \"src/**/*.ts\" || \"src/**/*.js\"",

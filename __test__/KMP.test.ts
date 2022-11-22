@@ -1,5 +1,5 @@
 import { evalKMPPrefix } from '../src/KMP-utils/KMP';
-import { findOne, findAll, findAllWithSkip } from '../src/index';
+import { findOne, findAll, skipThenFind } from '../src/index';
 
 const text = `The phrase hangs like a banner above the ruptures of 2020—a year that began three months into a civil rebellion in Iraq, which, like its Western torturer, saw the largest uprising in national history. Last spring I Was reminded of the demonstration where I first saw windows smashed: I was 20, at the 2012 march against NATO in Chicago, just after the “end” of the Second Gulf War.`;
 
@@ -96,53 +96,53 @@ test('testing findAll functionality with the word was and case-sensative', () =>
 });
 
 // ************************************************************
-// ****************** findAllWithSkip tests *******************
+// ****************** skipThenFind tests *******************
 // ************************************************************
 
 test('testing findAllWithSkip functionality with empty params', () => {
-  expect(findAllWithSkip('', '')).toEqual([]);
+  expect(skipThenFind('', '')).toEqual([]);
 });
 
-test('testing findAllWithSkip functionality with unexistant word', () => {
-  expect(findAllWithSkip(text, 'cool')).toEqual([]);
+test('testing skipThenFind functionality with unexistant word', () => {
+  expect(skipThenFind(text, 'cool')).toEqual([]);
 });
 
-test('testing findAllWithSkip functionality with empty word', () => {
-  expect(findAllWithSkip('this is a nice text for search', '')).toEqual([]);
+test('testing skipThenFind functionality with empty word', () => {
+  expect(skipThenFind('this is a nice text for search', '')).toEqual([]);
 });
 
-test('testing findAllWithSkip functionality with (history) word without passed options', () => {
-  expect(findAllWithSkip(text, 'the', {})).toEqual([0, 37, 159, 231, 297, 348, 361]);
+test('testing skipThenFind functionality with (history) word without passed options', () => {
+  expect(skipThenFind(text, 'the', {})).toEqual([0, 37, 159, 231, 297, 348, 361]);
 });
 
-test('testing findAllWithSkip functionality with (the) word and case-sensative option', () => {
-  expect(findAllWithSkip(text, 'the', { caseSensative: true })).toEqual([37, 159, 231, 297, 348, 361]);
+test('testing skipThenFind functionality with (the) word and case-sensative option', () => {
+  expect(skipThenFind(text, 'the', { caseSensative: true })).toEqual([37, 159, 231, 297, 348, 361]);
 });
 
-test('testing findAllWithSkip functionality with (The) word and case-sensative option', () => {
-  expect(findAllWithSkip(text, 'The', { caseSensative: true })).toEqual([0]);
+test('testing skipThenFind functionality with (The) word and case-sensative option', () => {
+  expect(skipThenFind(text, 'The', { caseSensative: true })).toEqual([0]);
 });
 
-test('testing findAllWithSkip functionality with (the) word and {skipXFirstResults: 0} option', () => {
-  expect(findAllWithSkip(text, 'the', { skipXFirstResults: 0 })).toEqual([0, 37, 159, 231, 297, 348, 361]);
+test('testing skipThenFind functionality with (the) word and {skipXFirstResults: 0} option', () => {
+  expect(skipThenFind(text, 'the', { skipXFirstResults: 0 })).toEqual([0, 37, 159, 231, 297, 348, 361]);
 });
 
-test('testing findAllWithSkip functionality with (the) word and {skipXFirstResults: 2} option', () => {
-  expect(findAllWithSkip(text, 'the', { skipXFirstResults: 2 })).toEqual([159, 231, 297, 348, 361]);
+test('testing skipThenFind functionality with (the) word and {skipXFirstResults: 2} option', () => {
+  expect(skipThenFind(text, 'the', { skipXFirstResults: 2 })).toEqual([159, 231, 297, 348, 361]);
 });
 
-test('testing findAllWithSkip functionality with (the) word and {skipXFirstResults: 7} option', () => {
-  expect(findAllWithSkip(text, 'the', { skipXFirstResults: 7 })).toEqual([]);
+test('testing skipThenFind functionality with (the) word and {skipXFirstResults: 7} option', () => {
+  expect(skipThenFind(text, 'the', { skipXFirstResults: 7 })).toEqual([]);
 });
 
-test('testing findAllWithSkip functionality with (the) word and {skipXLastResults: 0} option', () => {
-  expect(findAllWithSkip(text, 'the', { skipXLastResults: 0 })).toEqual([0, 37, 159, 231, 297, 348, 361]);
+test('testing skipThenFind functionality with (the) word and {skipXLastResults: 0} option', () => {
+  expect(skipThenFind(text, 'the', { skipXLastResults: 0 })).toEqual([0, 37, 159, 231, 297, 348, 361]);
 });
 
-test('testing findAllWithSkip functionality with (the) word and {skipXLastResults: -2} option', () => {
-  expect(findAllWithSkip(text, 'the', { skipXLastResults: -2 })).toEqual([0, 37, 159, 231, 297]);
+test('testing skipThenFind functionality with (the) word and {skipXLastResults: -2} option', () => {
+  expect(skipThenFind(text, 'the', { skipXLastResults: -2 })).toEqual([0, 37, 159, 231, 297]);
 });
 
-test('testing findAllWithSkip functionality with (the) word and {skipXLastResults: -9} option', () => {
-  expect(findAllWithSkip(text, 'the', { skipXLastResults: -9 })).toEqual([]);
+test('testing skipThenFind functionality with (the) word and {skipXLastResults: -9} option', () => {
+  expect(skipThenFind(text, 'the', { skipXLastResults: -9 })).toEqual([]);
 });

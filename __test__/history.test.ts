@@ -1,103 +1,96 @@
-import {
-  pushWord,
-  clearHistory,
-  jumpToIndex,
-  getPreviousWord,
-  getNextWord,
-  historyLength,
-  initHistory,
-  getCurrentPosition,
-} from '../src/history/history';
+import { WordHistory } from '../src/index';
+
+const wordHistory = new WordHistory();
 
 describe('testing the historyStack starting with empty array []', () => {
-  beforeEach(() => initHistory([]));
+  beforeEach(() => wordHistory.init([]));
 
   // ************************************************************
   // ********************* initHistory Function *****************
   // ************************************************************
 
   test('initialize the history with empty history', () => {
-    expect(historyLength()).toBe(0);
-    expect(getCurrentPosition()).toBe(0);
+    expect(wordHistory.size()).toBe(0);
+    expect(wordHistory.getCurrentIndex).toBe(0);
   });
 
   // ************************************************************
-  // ********************* pushWord Function ********************
+  // ********************* add Method ********************
   // ************************************************************
 
-  test('test pushWord with empty string word', () => {
-    expect(pushWord('')).toBe(null);
-    expect(historyLength()).toBe(0);
+  test('test add method with empty string word', () => {
+    expect(wordHistory.add('')).toBe(null);
+    expect(wordHistory.size()).toBe(0);
   });
 
-  test('test pushWord with value (bill)', () => {
-    expect(pushWord('bill')).toBe('bill');
-    expect(historyLength()).toBe(1);
-  });
-
-  // ************************************************************
-  // ********************* getPreviousWord Function *************
-  // ************************************************************
-
-  test('test getPreviousWord after clearing the history', () => {
-    expect(getPreviousWord()).toBe(null);
+  test('test add method with value (bill)', () => {
+    expect(wordHistory.add('bill')).toBe('bill');
+    expect(wordHistory.size()).toBe(1);
   });
 
   // ************************************************************
-  // ********************* getNextWord Function *****************
+  // ********************* getPrevious Method *************
   // ************************************************************
 
-  test('test getNextWord with after clearing the history', () => {
-    expect(getNextWord()).toBe(null);
+  test('test getPrevious after clearing the history', () => {
+    expect(wordHistory.getPrevious()).toBe(null);
   });
 
   // ************************************************************
-  // ********************* jumpToIndex Function *****************
+  // ********************* getNext Method *****************
   // ************************************************************
 
-  test('test jumpToIndex with value (-1)', () => {
-    expect(jumpToIndex(-1)).toBe(null);
-  });
-
-  test('test jumpToIndex with value (0)', () => {
-    expect(jumpToIndex(0)).toBe(null);
-  });
-
-  test('test jumpToIndex with value (1)', () => {
-    expect(jumpToIndex(1)).toBe(null);
+  test('test getNext with after clearing the history', () => {
+    expect(wordHistory.getNext()).toBe(null);
   });
 
   // ************************************************************
-  // ********************* clearHistory Function ****************
+  // ********************* goToIndex Mehtod *****************
   // ************************************************************
 
-  test('test clearHistory functionality', () => {
-    expect(clearHistory()).toBe(undefined);
-    expect(historyLength()).toBe(0);
+  test('test goToIndex method with value (-1)', () => {
+    expect(wordHistory.goToIndex(-1)).toBe(null);
+  });
+
+  test('test goToIndex method with value (0)', () => {
+    expect(wordHistory.goToIndex(0)).toBe(null);
+  });
+
+  test('test goToIndex method with value (1)', () => {
+    expect(wordHistory.goToIndex(1)).toBe(null);
+  });
+
+  // ************************************************************
+  // ********************* clear Mehtod ****************
+  // ************************************************************
+
+  test('test clear method', () => {
+    expect(wordHistory.clear()).toBe(undefined);
+    expect(wordHistory.size()).toBe(0);
   });
 });
 
 describe('testing the historyStack starting with initial values ["is", "class", "id"]', () => {
-  beforeEach(() => initHistory(['is', 'class', 'id']));
+  beforeEach(() => wordHistory.init(['is', 'class', 'id']));
 
   // ************************************************************
-  // ********************* initHistory Function *****************
+  // ********************* init Mehtod *****************
   // ************************************************************
 
   test('initialize the history after initialize the history', () => {
-    expect(historyLength()).toBe(3);
-    expect(getCurrentPosition()).toBe(2);
+    expect(wordHistory.size()).toBe(3);
+    expect(wordHistory.getCurrentIndex).toBe(2);
   });
 
   // ************************************************************
-  // ********************* pushWord Function ********************
+  // ********************* add Mehtod ********************
   // ************************************************************
-  test('test pushWord with empty string word', () => {
-    expect(pushWord('')).toBe(null);
+  test('test add method with empty string word', () => {
+    expect(wordHistory.add('')).toBe(null);
   });
 
-  test('test pushWord with an already existing word (is)', () => {
-    expect(pushWord('is')).toBe('is');
+  test('test add method with an already existing word (is)', () => {
+    expect(wordHistory.add('is')).toBe('is');
 
     const findIndex = jest.fn(() => 0);
     expect(findIndex()).toBe(0);
@@ -105,85 +98,85 @@ describe('testing the historyStack starting with initial values ["is", "class", 
     const splice = jest.fn(() => ['class', 'id']);
     expect(splice()).toEqual(['class', 'id']);
 
-    expect(historyLength()).toBe(3);
-    expect(getCurrentPosition()).toBe(2);
+    expect(wordHistory.size()).toBe(3);
+    expect(wordHistory.getCurrentIndex).toBe(2);
   });
 
-  test('test pushWord with non existing word (play)', () => {
-    expect(pushWord('play')).toBe('play');
+  test('test add method with non existing word (play)', () => {
+    expect(wordHistory.add('play')).toBe('play');
 
     const findIndex = jest.fn(() => -1);
     expect(findIndex()).toBe(-1);
 
-    expect(historyLength()).toBe(4);
-    expect(getCurrentPosition()).toBe(3);
+    expect(wordHistory.size()).toBe(4);
+    expect(wordHistory.getCurrentIndex).toBe(3);
   });
 
   // ************************************************************
-  // ********************* jumpToIndex Function *****************
+  // ********************* goToIndex Mehtod *****************
   // ************************************************************
 
-  test('test jumpToIndex with value (-1)', () => {
-    expect(jumpToIndex(-1)).toBe(null);
+  test('test goToIndex with value (-1)', () => {
+    expect(wordHistory.goToIndex(-1)).toBe(null);
   });
 
-  test('test jumpToIndex with value (0)', () => {
-    expect(jumpToIndex(0)).toBe('is');
+  test('test goToIndex with value (0)', () => {
+    expect(wordHistory.goToIndex(0)).toBe('is');
   });
 
-  test('test jumpToIndex with value (2)', () => {
-    expect(jumpToIndex(2)).toBe('id');
+  test('test goToIndex with value (2)', () => {
+    expect(wordHistory.goToIndex(2)).toBe('id');
   });
 
-  test('test jumpToIndex with value (3)', () => {
-    expect(jumpToIndex(3)).toBe(null);
+  test('test goToIndex with value (3)', () => {
+    expect(wordHistory.goToIndex(3)).toBe(null);
   });
 });
 
-describe('test getPreviousWord and getNextWord tools together', () => {
-  beforeAll(() => initHistory(['is', 'class', 'id']));
+describe('test getPrevious and getNext tools together', () => {
+  beforeAll(() => wordHistory.init(['is', 'class', 'id']));
 
   // ************************************************************
-  // ********************* getPreviousWord Function *************
+  // ********************* getPrevious Mehtod *************
   // ************************************************************
 
-  test('test getPreviousWord first time', () => {
-    expect(getPreviousWord()).toBe('class');
-    expect(historyLength()).toBe(3);
-    expect(getCurrentPosition()).toBe(1);
+  test('test getPrevious first time', () => {
+    expect(wordHistory.getPrevious()).toBe('class');
+    expect(wordHistory.size()).toBe(3);
+    expect(wordHistory.getCurrentIndex).toBe(1);
   });
 
-  test('test getPreviousWord second time', () => {
-    expect(getPreviousWord()).toBe('is');
-    expect(historyLength()).toBe(3);
-    expect(getCurrentPosition()).toBe(0);
+  test('test getPrevious second time', () => {
+    expect(wordHistory.getPrevious()).toBe('is');
+    expect(wordHistory.size()).toBe(3);
+    expect(wordHistory.getCurrentIndex).toBe(0);
   });
 
-  test('test getPreviousWord while the currentPosition is at 0', () => {
-    expect(getPreviousWord()).toBe(null);
-    expect(historyLength()).toBe(3);
-    expect(getCurrentPosition()).toBe(0);
+  test('test getPrevious while the getCurrentIndex is at 0', () => {
+    expect(wordHistory.getPrevious()).toBe(null);
+    expect(wordHistory.size()).toBe(3);
+    expect(wordHistory.getCurrentIndex).toBe(0);
   });
 
   // ************************************************************
-  // ********************* getNextWord Function *****************
+  // ********************* getNext Mehtod *****************
   // ************************************************************
 
-  test('test getNextWord while the currentPosition is at index 0', () => {
-    expect(getNextWord()).toBe('class');
-    expect(historyLength()).toBe(3);
-    expect(getCurrentPosition()).toBe(1);
+  test('test getNext while the getCurrentIndex is at index 0', () => {
+    expect(wordHistory.getNext()).toBe('class');
+    expect(wordHistory.size()).toBe(3);
+    expect(wordHistory.getCurrentIndex).toBe(1);
   });
 
-  test('test getNextWord while the second time', () => {
-    expect(getNextWord()).toBe('id');
-    expect(historyLength()).toBe(3);
-    expect(getCurrentPosition()).toBe(2);
+  test('test getNext while the second time', () => {
+    expect(wordHistory.getNext()).toBe('id');
+    expect(wordHistory.size()).toBe(3);
+    expect(wordHistory.getCurrentIndex).toBe(2);
   });
 
-  test('test getNextWord while the currentPosition equals to history.length', () => {
-    expect(getNextWord()).toBe(null);
-    expect(historyLength()).toBe(3);
-    expect(getCurrentPosition()).toBe(2);
+  test('test getNext while the getCurrentIndex equals to wordHistory.size()', () => {
+    expect(wordHistory.getNext()).toBe(null);
+    expect(wordHistory.size()).toBe(3);
+    expect(wordHistory.getCurrentIndex).toBe(2);
   });
 });

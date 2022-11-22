@@ -48,11 +48,7 @@ const findOne = (text: string, word: string, options: Options = {}): number => {
  */
 
 const findAll = (text: string, word: string, options: Options = {}): number[] => {
-  if (!text) {
-    return [];
-  }
-
-  if (!word) {
+  if (!text || !word) {
     return [];
   }
 
@@ -80,11 +76,7 @@ const findAll = (text: string, word: string, options: Options = {}): number[] =>
     }
   }
 
-  if (allPositions.length) {
-    return allPositions;
-  }
-
-  return [];
+  return allPositions;
 };
 
 /**
@@ -110,8 +102,4 @@ const skipThenFind = (text: string, word: string, options: Options = {}): number
   return results;
 };
 
-export default {
-  findOne,
-  findAll,
-  skipThenFind,
-};
+export { findOne, findAll, skipThenFind };
