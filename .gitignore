@@ -5,6 +5,7 @@
 
 # testing
 /coverage
+/src/text_sample.ts
 
 # production
 /build
