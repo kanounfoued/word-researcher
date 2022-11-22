@@ -1,2 +1,2 @@
 export { default as WordHistory } from './history';
-export { default as Finder } from './finder';
+export { findOne, findAll, skipThenFind } from './finder';

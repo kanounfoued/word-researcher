@@ -7,6 +7,11 @@ export default class WordHistory<T> {
     this.currentIndex = history.length > 0 ? history.length - 1 : 0;
   }
 
+  init(history: T[] = []) {
+    this.history = [...history];
+    this.currentIndex = history.length > 0 ? history.length - 1 : 0;
+  }
+
   add<K extends keyof T>(word: T, property?: K): T | null {
     if (!word) return null;
     let index = -1;

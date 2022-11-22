@@ -1,1 +1,2 @@
-export { default } from './finder';
+import { findOne, findAll, skipThenFind } from './finder';
+export { findOne, findAll, skipThenFind };
